@@ -2474,6 +2474,8 @@ TEST_CASE("do not flood too many transactions", "[herder][transactionqueue]")
         fees.pop_front();
         fees.pop_front();
 
+        // clear floodmap etc so that we track actual broadcasts
+        om.clearLedgersBelow(100, 100);
         auto numBroadcast = om.getOverlayMetrics().mMessagesBroadcast.count();
         externalize(cfg.NODE_SEED, lm, herder, {tx1a, tx1r});
 
